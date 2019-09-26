@@ -1,0 +1,14 @@
+﻿1. Share Data giữa máy Host và container(dữ liệu vẫn tồn tại khi container bị xóa)
+docker run -it -v pathHost:pathContainer imageId
+2. Share Data giữa các container
+docker run -it -v pathHost:pathContainer imageId --name C1
+docker run -it --name C2 --volumes-form C1 ubuntu:lasted
+3. Volume(tạo ổ đĩa lữu dữ liệu, dữ liệu vẫn còn khi xóa container)
+docker volume create nameDisk		//create
+docker volume inspect nameDisk	// info volume
+docker volume ls				// list
+docker volume rm nameDisk		// del
+docker volume create --opt device=pathHost --opt type=none --opt o=bind nameDisk
+// Tạo ở đĩa ánh xạ từ pathHost, khi sử dụng ổ đĩa loại này ko sử dụng mount
+
+docker run --it --mount source=DISK,target=pathContainer imageID

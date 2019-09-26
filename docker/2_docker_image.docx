@@ -1,0 +1,22 @@
+﻿1. help
+	docker .. --help
+2. image
+	docker images			// list
+	docker search key	
+	docker pull name:tag		// download
+	docker image rm name:tag	// delete
+
+3. container (khi thực thi các image được gọi là các container)
+	docker run thamso IMAGE command thamsolenh		// build
+// docker run -it --name NAME -h hostName centos:lasted
+	-h: hostname
+	--name: NAME container
+
+	docker ps					// check docker runing
+	docker ps -a				// list container
+	docker start id/names			// run container
+	docker attach id/names			// quay trở vào container vừa run ở trên
+// muốn thoát terminal của container mà vẫn muốn container chạy(không dùng exit): ctr + p + q
+	docker stop id/names			// stop
+	docker rm id/names			// remove
+	docker rm -f id/name			// remove khi container vẫn đang chạydo

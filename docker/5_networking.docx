@@ -1,0 +1,12 @@
+﻿Busybox: image chứa nhiều lệnh hỗ trợ linux
+
+docker network ls			// list network
+docker network inspect nameNetwork		// info network
+docker run -it --name B2 -p portHost:portCon nameCon		// ánh xạ cổng của máy host vào cổng của container.(để truy cập vào mạng của máy container)
+
+docker network create --driver bridge nameNetwork	// tạo mạng bridge
+docker network rm nameNetwork					// xóa network
+
+docker run -it --name B3 --network nameNetwork nameCon	// tạo container kết nối network riêng có tên nameNetwork
+
+docker network connect nameNetwork nameCon		// kết nối container với mạng  có tên nameNetWork(để 1 container kết nối đc nhiều mạng)

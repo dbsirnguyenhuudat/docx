@@ -1,0 +1,10 @@
+﻿1. Exec
+docker exec nameCon  Lenh	// Thi hành lệnh trong container khi đang ở máy host
+2. Lưu container thành images
+docker commit nameCon NAME:tag
+3. Lưu container thành file
+docker save --output nameFile.tar id/NameImage
+4. Load file thành image
+docker load -i nameFile.tar
+5. Đặt tên cho image khi image được load từ file
+docker tag id_image name:tag
