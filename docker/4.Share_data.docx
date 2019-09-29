@@ -12,3 +12,6 @@ docker volume create --opt device=pathHost --opt type=none --opt o=bind nameDisk
 // Tạo ở đĩa ánh xạ từ pathHost, khi sử dụng ổ đĩa loại này ko sử dụng mount
 
 docker run --it --mount source=DISK,target=pathContainer imageID
+4. Copy data from host to container
+docker cp foo.txt mycontainer:/foo.txt
+
