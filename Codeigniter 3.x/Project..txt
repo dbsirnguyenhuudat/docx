@@ -1,0 +1,144 @@
+﻿HMVC
+	- modules => admin | default
+	- remove index.php
+	- autoload: library session | config: encryption_key 
+Master Layout
+	- app/views/admin: template | top | left | menu | bottom
+	- $this->load->view('$module/...') | $this->load->view($loadPage) | $titlePage
+	- autoload: helper Url
+	- ./public/ admin|default / js | css
+Core
+	- MY_Controller
+	- AdminController
+		- $this->_data['module'] = $this->uri->segment(1);
+		- $this->_data['path'] = $this->_data['module'].'/template'
+		- Nếu session level != 2 và controller != verify => Đẩy về login
+User Controller
+	- $this->_data['loadPage'] 
+	- $this->_data['titlePage']
+	- $this->load->model('Muser')
+	- $this->load->view($this->_data['path'],$param_array)
+	- config validation_errors() | nơi xuất thông báo lỗi// form_helper;
+- index()
+	- $this->Muser->listAllUser()
+	- library Pagination
+- add()
+	- Form Heler // Do nhập nhiều giá trị nên sử dụng form helper
+	- Library: form_validation 
+	- Chú ý $config[‘uri_segment’] do sử dụng hmvc
+	- Chú ý call back của hmvc : callback_check_user, callback_check_email
+	- insertUser($data);
+	- set_flashdata
+	- redirect
+	
+     - check_user($u);
+	- set_message
+     - check_email($e)
+	- set_message
+- update($id)
+	- getUserById($id);
+	- Form helper
+	- form_validation
+	- $config[‘uri_segment’]
+	- Chú ý call back của hmvc : callback_check_user, callback_check_email => Do update có điều kiện where
+	- Chú ý người dùng có cập nhật pas hay không
+	- updateUser($data,$id)
+	- set_flashdata
+	- redirect
+- delete($id)
+	- deleteUserById($id);
+	- set_flashdata
+	- redirect
+	
+User Model
+	- listAllUser() //index
+	- countAll() //index
+	- checkUsername($u,$id = '') // add - user
+	- checkEmail($e, $id = '') // add - user
+	- insertUser($data) // add
+	- getUserById($id) // update
+	- updateUser($data,$id) //update
+	- deleteUserById($id) // delete
+
+	- checklogin($u,$p) // verify - login
+
+Verify
+login()
+	- checklogin($u,$p);
+	- $this->session->set_flashdata(...)
+	- $this->session->set_userdata(..)
+	- redirect(...)
+
+logout()
+	- $this->session->sess_destroy()
+	- redirect(...)
+
+Categorie Controller
+	- $this->_data['loadPage'] 
+	- $this->_data['titlePage']
+	- $this->load->model('Mcategorie')
+	- $this->load->view($this->_data['path'],$param_array)
+index()
+	- listAllCate();
+delete($id)
+	- deleteCateById($id)
+	- Javascript confirm_delete()
+	- $this->session->set_flashdata(...)
+	- redirect
+create()
+	- Sử dụng Jquery
+	- Hidden form add
+	- Click Add --> Show form add
+	- Tạo và sử dụng helper menu
+	- Lấy dữ liệu nhập từ textbox bằng jquery
+	- $("???").html('error').addClass('mess_err');
+	- $.ajax({})
+	- Chú ý đến đường dẫn khi sử dụng jquery ajax
+	- $("input").not(':submit').val('') | $("???").html('&nbsp;').addClass('mess_err');
+	- insertCate($data);
+	- $("???").reload(Url+"admin/categorie/reload")
+Config template alert;
+- reload()
+	- listAllCate() => Đổ ra view
+- edit($id)
+	- getCateById($id);
+	- helper Menu
+	- library form_validation
+	- updateCate($data,$id)
+	- set_flashdata
+	- redirect
+Categorie Model
+	- listAllCate() // index
+	- deleteCAteById($id) // delete
+	- insertCate($data); //create
+	- getCateById($id) // edit
+	- updateCate($data,$id)
+-------------------------------------------------------------------------
+DATABASE
+	- users
+	- categories
+	- products
+	- transactions // Tạm thời chưa tương tác
+	- oders
+	- sizes
+
+Cate - Product
+	- 1 Cate - N Product 
+	- 1 Product  -  1 Cate
+	Quan hệ 1 - N, Bảng Product xuất hiện 1 khóa ngoại: cateID
+User - Order
+	- 1 User - N Order
+	- 1 Order - 1 User
+	Quan hệ 1 - N, Bảng Order xuất hiện thêm 1 khóa ngoại: userID
+Product - Order
+	- 1 Product - N Order
+	- 1 Order - N Product
+	- Quan hệ N-N, Xuất hiện bảng Product_Order, với khóa ngoại product_id và order_id
+
+Product - Size
+	- 1 Product - N Size
+	- 1 Size - N Product
+	- Quan hệ N - N, xuất hiện bảng product_size, với khóa ngoại product_id và size_id
+
+	
+	

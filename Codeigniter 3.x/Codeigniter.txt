@@ -1,0 +1,144 @@
+﻿Bài 1:
+Controller
+	- base_url/index.php/controller/action/param
+	- application/controllers/Tên_controller
+	- base class: CI_Controller
+	- parent::__construct()()
+	- $this->load->view('tên_view',$data_array);
+	- $this->load->model('tên_model');
+	- $this->Tên_model->tên_phương_thức();
+View
+	- Chỉ tạo 1 lớp thư mục trong thư mục controllers và views (phân cấp thư mục /)
+
+Model
+	- base class: CI_Model
+	- $this->load->database();
+	- $query=$this->db->query($sql); $query->num_rows(); $query->row_array(); $query->result_array();
+	- $this->db->select->('col',...);
+	- $this->db->where('col','val'); 
+	- $this->db->order_by('col type');
+	- $this->db->limit('record','start');
+	- $this->db->get('table')->result_array();
+	- $this->db->insert('table',$data_array);
+	- $this->db->where(...)->update('table',$data_array);
+	- $this->db->where(...)->delete('table');
+	- $this->db->join('table','Điều kiện kết bảng');
+	
+Bài 2: 
+Helper
+	- $this->load->helper('???');
+URL Helper
+	- url : base_url() | redirect(url);
+Form Helper
+	- form_open($url,$data_attr), form_open_multipart($url,$data_attr);
+	- form_close();
+	- form_fieldset('name',$data_attr) | form_fieldset_close();
+	- form_label('text show','name',$data_attr)
+	- form_input($data_array)
+	- form_password($data_array)
+	- form_radio($data_array)
+	- form_textarea($data_array)
+	- form_dropdown('name',$data_option,'select')
+	- form_submit('name','value',$data_attr)
+Form_validation
+	- $this->load->library('form_validation');
+	- $this->form_validation->phương_thức();
+	- $this->form_validation->set_rules('name_textbox','Tên hiển thị khi gặp lỗi','rules1|rules2|...') || $this->form_valdiation->set_rules('name_textbox','Tên hiển thị khi gặp lỗi','rules1|...',array('rules1','Langs Er
+ror'))
+	- $this->form_validation->run() == false
+	- validation_errors();
+	- set_value('name_textbox');
+	- $this->form_validation->set_rules(...,...,callback_tên_lỗi) => public function tên_lỗi(param){ ... $this->form_validation->set_message('tên_lỗi','errors langs') ...}
+Bài 3:
+Pagination
+	- $this->load->library('pagination')
+	- $config['base_url'] , $config['total_rows'], $config['per_page'] | $this->pagination->initialize('config')
+	- $this->pagination->create_links()
+	- $this->uri->segment('vị_trí')
+	- Chú ý với phân cấp thư mục
+Session
+	- $config['encryption_key']
+	- $this->load->library('session')
+	- $this->session->set_userdata($data_array) | $this->session->set_userdata('name','val')
+	- $this->session->userdata('name')
+	- $this->session->unset('name') | $this->session->unset(array('name_1'=>'','name_2'=>''))
+	- $this->session->sess_destroy()
+	- $this->session->all_userdata();
+	- $this->session->has_userdata('name')
+	- $this->session->set_flashdata('name','val')
+	- $this->session->flashdata('name');
+Input
+	- $this->input->get('name');
+	- $this->input->post('name');
+	- $this->input->ip_address();
+	- $this->input->is_ajax_request();
+Bài 4:
+Upload
+	- $config['upload_path'] | $config['allowed_types'] | $config['max_size'] | ...
+	- $this->load->library('upload',$config)
+	- $this->upload->do_upload('name_field')
+	- $this->upload->display_errors('thẻ mở','thẻ đóng')
+	- $this->upload->data();
+Image
+	- $config['image_library'] | $config['source_image'] | ...
+	- $this->load->library("image_lib)
+	- $this->image_lib->initialize($config)
+	- Cắt hình : $this->image_lib->resize()
+	- $this->image_lib->display_errors();
+	- $thumb_marker='thumb_';
+	- $config['wm_type'] = 'text' | 'overlay'
+	- Wantermark: $this->image_lib->watermark()
+	- Vừa Resize và Watermark() : Sau khỉ Resize => $this->image_lib->clear(); unset($config) ; $config['create_thumb'] = FALSE; => Wantermark();
+Bài 5:
+Migration
+
+Calendar
+	- $config = array( 'show_next_prev'  => TRUE, 'next_prev_url'  => $url ,'start_day' => 'monday');
+	- $this->load->library('calendar',$config);
+	- $event = array( '13' => $url); 
+	- $this->calendar->generate($this->uri->segment(3),$this->uri->segment(4),$event)
+	- $this->db->from('table')
+	- $this->db->like('col',$data)
+	- substr('data',vị trí bắt đầu,số ký tự cắt)
+Cart
+	- $this->load->library('cart');
+	- $data = array('id' => ? , 'qty' => ?, 'price' => ?, 'name'=>? , 'options' => array(?))
+	- $this->cart->insert($data);
+	- $this->cart->contents();
+	- $this->cart->update('data') | $data=array('rowid'=> ? , 'qty' => ?)
+	- $this->cart->remove('rowid')
+	- $this->cart->destroy();
+	- $this->cart->total();
+	- $this->cart->total_items()
+Bài 6:
+Hook
+	- application/config/config.php -> $config['enable_hooks'] =  true;
+	- application/config/hooks.php -> $hook['pre_controller'] = array();
+	- application/hooks/Myclass.php
+Create Libraries
+	- application/libraries/MyClass.php
+	- public function __construct($param){};
+	- $CI =& get_instance();
+	- $CI->load->helper('...') | $CI->load->library('...') | ...
+	- controllers: $this->load->library('MyClass',$param) | $this->myclass->MyMethod();
+	- Thay thế libraries của CI: Class CI_Email{}
+	- Kế thừa: class MY_Email extends CI_Email{}
+Core System
+	- application/core/MY_Controller.php
+	- class MY_Controller extends CI_Controller{ }
+	- public function __construct(){ parent::__construct();... }
+URI Routing 
+	- application/config/routes.php
+	- $route['đường_dẫn_ảo/:any/:num'] = 'đường_dẫn_thật/$1/$2'
+	- $route['đường_dẫn_ảo/([a-zA-Z]+)/(/d+)'] = 'đường_dẫn_thật/$1/$2'  		/d = [0-9]
+	- $route['đường_dẫn_ảo/:any/:num'] = function($param1,$param2){ ... }
+Caching
+	- $this->output->cache('số phút sống')
+	- $this->output->delete_cache();
+	- $this->output->delete_cache('/foo/bar');
+Bài 7: 
+Master Layout
+	- View lồng view
+HMVC
+	- MX_Controller
+	- modules::run('module/controller/method', $params, $...);
