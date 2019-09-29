@@ -1,0 +1,90 @@
+﻿1- PHP có mấy cách khai báo ?. Những cách nào được xem là chính thống và không ảnh hưởng khi các phiên bản update sau này ?.
+	4 cách khai báo
+	<?php ?>
+	<script language=”php”></script>
+ 
+2- Hằng trong PHP khác gì so với biến ?. Nếu 1 hằng được định nghĩa 2 lần, thì liệu có bị lỗi không ?. Cho ví dụ minh họa. Hằng có thể nội suy như biến hay không ?.
+	Khác cách khai báo và hằng có giá trị bất biến còn biến thì giá trị có thể thay đổi.
+	Nếu 1 hằng được định nghĩa 2 lần không bị lỗi nhưng chỉ nhận giá trị của lần định nghĩa đầu tiên. Vd: define(‘RED’, ‘Màu đỏ’)
+	Hằng không thể nội suy như biến
+ 
+3- Có bao nhiêu biến môi trường ?. $_REQUEST có thể nhận được giá trị từ form hay không ?.
+ 
+4- Phân biệt sự khác nhau giữa $_POST và $_GET.
+	Đều gửi dữ liệu lên server
+	$_POST gửi dữ liệu ẩn thông qua HTTP HEADER
+	$_GET gửi dữ liệu qua đường dẫn URL, do url bị giới hạn ký tự nên dữ liệu gửi lên server cũng bị giới hạn
+ 
+5- Mảng tuần tự là gì ?. Khác gì với bất tuần tự ?. Để duyệt mảng ta dùng vòng lặp nào ?. Tại sao vòng lặp for, while, do....while lại không ưu tiên sư dụng trong duyệt mảng ?.
+	Mảng tuần tự là mảng có khóa là các số 0, 1, 2 …
+	Mảng bất tuần tự là mảng có khóa là các ký tự
+	Để duyệt mạng ta dùng vòng lặp foreach
+	Do for, while, do … while không lặp được mảng bất tuần tự và khi dùng các vòng lặp for, while, .. phải biết chính xác chiều dài của mảng
+ 
+6- Để chuyển mảng thành chuỗi ta dùng hàm gì ?. Để tách chuỗi thành mảng ta dùng hàm gì?. Để gộp mảng ta dùng hàm gì ? Để tách mảng ta dùng hàm gì ?.
+	Để chuyển mảng thành chuỗi ta dùng hàm implode.
+	Để tách chuỗi thành mảng ta dùng hàm explode.
+	Để tách mảng ta dùng array_slice($arr, start, length)
+ 
+7- Cho biết sự khác nhau giữa serialize và json_encode. Lý giải theo cách bạn hiểu.
+	Cả 2 đều chuyển mảng, đối tượng thành 1 chuỗi.
+	Chuỗi json thì dùng được cả trong javascript, …
+	còn chuỗi của serialize thì chỉ php đọc được.
+ 
+8- Cookie và session có gì khác nhau ?. Người ta nói bản thân của session là cookie, điều đó đúng hay sai ?. Nếu muốn tăng thời gian sống của session thì thiết lập thế nào ?.
+	Cookie lưu thông tin người dùng ở máy client, session lưu thông tin người dùng trên máy chủ.
+	Bản thân session là cookie vì về cơ bản session và cookie đều là các tập tin lưu trữ thông tin của người dùng Website.
+	Do thời gian sống của session do websever quy định. Ta có thể điều chỉnh thời gian này khi cấu hình webserver
+ 
+9- Giả sử bạn là chủ của server, làm thế nào có thể biết được các file session lưu ở đâu ?. Bạn có thể can thiệp, chỉnh sửa file session này hay không ?.
+	Sử dụng google, có thẻ chỉnh sửa file session này.
+ 
+10- Theo bạn, sự khác nhau của toán tử & và && là gì ?. Hãy cho biết $a++ và ++$a khác nhau ở đâu ?. Tính nhanh kết quả của đoạn code sau trong 2 phút:
+<?php
+$a=5;
+echo $a++ + $a-- + --$a + ++$a + $a++ + ++$a - $a-- + $a;
+	5(6) + 6(5) + 4 + 5 + 5(6) + 7 – 7(6) + 6	// 31
+?>
+ 
+	& và && đều là toán tử AND; nhưng & là toán tử trả kết quả bit, còn && là trả kết quả dạng true; false.
+	$a++ và ++$a đều là phép tăng dần. $a++ là tăng giá trị sau rồi mới gán vào $a; còn ++$a là tăng giá trị của $a lên trước rồi mới gán vào $a. Vd: $a = 5;
+	echo $a++; // 5
+	echo ++$a; //6
+11- Mysql_close() cần thiết như thế nào trong thực tế ?. Vì sao ít thấy người dùng áp dụng nó.
+	Mysql_close(): Đóng kết nối với csdl.
+	Ví dụ: 100 người lúc đầu cần kết nối tới CSDL. Sau đó còn 50 người vẫn cần kết nối tới CSDL, do ko đóng kết nối dẫn đến dù còn 50 người cần kết nối thôi nhưng vẫn có 100 kết nối tới CSDL. Dễ dẫn tới tình trạng quá tải.
+ 
+12- Muốn chuẩn hóa dữ liệu về utf-8 ta phải làm gì ?.
+ 	Trên PHP thì ở tag meta charset=”UTF-8” tại HEAD
+	Trên CSDL thì chọn dạng utf-8-genaral-ci
+13- Làm sao lấy được id vừa tiến hành thêm vào CSDL ngay ?
+	mysqli thì dùng hàm mysqli_insert_id;
+	mysql thì dùng câu truy vấn select id from TABLE order by id desc.
+ 
+14- Để đếm số dòng, ta nên dùng mysql_num_rows() trên câu truy vấn "select * from...." hay count trực tiếp trong câu truy vấn ?.
+	Ta nên dùng mysql_num_rows() trên câu truy vấn vì như vậy trả luôn ra số dòng ta cần.
+	Còn khi count trực tiếp trong câu truy vấn thì ta phải in dữ liệu ra rồi lại truy cập vào trong khối dữ liệu lấy cột dữ liệu đó ra. => khá mất thời gian
+ 
+15- Việc enter có giá trị hay không trong textarea bình thường (không nhúng khung soạn thảo). Và làm thế nào để có thể hiển thị ra bên ngoài thao tác xuống dòng như bình thường.
+	Việc enter không có giá trị trong textarea bình thường;
+	Để hiển thị thao tác xuống dòng như bình thường ta sử dụng cặp thẻ pre
+ 
+16- fgets() và fgetc() khác nhau như thế nào ?. fgets() và fread() khác nhau ra sao ?. feof là gì, nó có ý nghĩa như thế nào ?. file_get_contents() khác gì so với fread() ?. 
+	Fgets() là đọc file theo dòng 
+	Fgetc() là đọc file theo ký tự
+	Fread() là đọc file theo số byte 
+	feof là tìm vị trí cuối cùng của 1 file
+	file_get_contents() // Đọc file từ vị trí a → b
+ 
+17- Khi mở file (fopen) để đọc file, rồi sau đó tiếp tục thực hiện hành động ghi file. Ta cần lưu ý điều gì ?.
+	Sau khi đọc file xong ta phải đóng file lại (fclose). Sau đó mới mở file để thực hiện hành động ghi.
+ 
+18- Làm sao để chuyển đổi từng dòng trong file text thành từng phần tử trong mảng với khóa tuần tự là 0 ?.
+	Ta dùng hàm file() trong php;
+ 
+19- Có thể lưu trữ dữ liệu trên file hay không ?. Lúc nào thì nên lưu trên file, lúc nào thì lưu trên CSDL ?.
+	Có thể lưu dữ liệu được ở trên file.
+	Khi dữ liệu ít, không cần các thao tác tìm kiếm, sắp xếp, ...
+ 
+20- Để thực hiện việc upload ta phải cần những điều gì ?.
+	Ta cần phải thêm thuộc tính enctype=”multipart/form-data” trên thẻ form
