@@ -1,0 +1,52 @@
+﻿1. API (application programming interface) chính là cầu nối.
+Ví dụ: khi đến một nhà hàng - bạn đặt món ăn - nhưng làm sao để đầu bếp biết bạn đã đặt món gì - anh bồi bàn chính là API, kết nối thông tin của bạn tới đầu bếp và ngược lại.
+
+2. Restful API:  là một tiêu chuẩn dùng trong việc thết kế các thiết kế API cho các ứng dụng web để quản lý các resource.
+
+- Try − Một hàm sử dụng một exception nên là một khối try. Nếu exception không kích hoạt, code sẽ tiếp tục như bình thường. Tuy nhiên, nếu exception kích hoạt, một exception được "thrown".
+  Throw − Đây là cách bạn kích hoạt một exception. Mỗi "thrown" phải có ít nhất một "catch".
+  Catch − Mỗi khối "catch" thu nhận một exception và tạo một đối tượng chứa thông tin exception đó.
+<?php
+   try {
+      $error = 'Luôn luôn ném lỗi này';
+      throw new Exception($error);
+      // Phần code mà theo sau một ngoại lệ sẽ không được thực thi.
+      echo 'Phần code này không bao giờ được thực thi';
+   }
+   catch (Exception $e) {
+      echo 'Bắt ngoại lệ: ',  $e->getMessage(), "\n";
+   }
+   // Tiếp tục tiến trình thực thi
+   echo 'Hello World';
+?>
+      $e->getMessage()− thông báo của exception
+      $e->getCode()− code của exception
+      $e->getFile()− tên source file
+      $e->getLine()− source line
+      $e->getTrace()− n mảng của backtrace()
+      $e->getTraceAsString()− chuỗi được định dạng của trace
+      
+3. Transaction: là một nhóm các câu lệnh SQL có thứ tự các hoạt động thao tác trên cơ sở dữ liệu nhưng được xem như một đơn vị thao tác duy nhất và chúng chỉ có thể cùng nhau thành công hoặc cùng nhau thất bại.
+	Có 4 thuộc tính của transaction(ACID):
+	Atomicity (Tính nguyên tố): Đảm bảo tất cả các hành động trong một đơn vị giao dịch là thành công hoàn toàn. Ngược lại giao dịch sẽ bị dừng ngay tại thời điểm bị lỗi. Tất nhiên các hoạt động trước trong giao dịch đó sẽ quay lại đúng trạng thái cũ của nó. Chẳng hạn việc chuyển tiền có thể thành công hay trục trặc vì nhiều lý do nhưng tính nguyên tố bảo đảm rằng một tài khoản sẽ không bị trừ tiền nếu như tài khoản kia chưa được cộng số tiền tương ứng.
+	Consistency(Tính nhất quán) :Đảm bảo cơ sở dữ liệu được thay đổi đúng trạng thái sau khi giao dịch thành công và không xảy ra lỗi.
+Isolation(Tính cô lập). Đảm bảo giao dịch này hoạt động độc lập so với giao dịch khác.
+	Isolation(Tính cô lập) Đảm bảo giao dịch này hoạt động độc lập so với giao dịch khác.
+	Durability(Tính bền vững): Đảm bảo kết quả hoặc tác động của giao dịch vẫn luôn tồn tại, kể cả khi hệ thống xảy ra lỗi.
+
+4. Cookie: Cookie là 1 đoạn dữ liệu được ghi vào đĩa cứng hoặc bộ nhớ của máy người sử dụng. Nó được trình duyệt gởi ngược lên lại server mỗi khi browser tải 1 trang web từ server.
+Những thông tin được lưu trữ trong cookie hoàn toàn phụ thuộc vào website trên server. Mỗi website có thể lưu trữ những thông tin khác nhau trong cookie, ví dụ thời điểm lần cuối ta ghé thăm website, đánh dấu ta đã login hay chưa, v.v...
+Cookie được tạo ra bởi website và gởi tới browser, do vậy 2 website khác nhau (cho dù cùng host trên 1 server) sẽ có 2 cookie khác nhau gởi tới browser. Ngoài ra, mỗi browser quản lý và lưu trữ cookie theo cách riêng của mình, cho nên 2 browser cùng truy cập vào 1 website sẽ nhận được 2 cookie khác nhau.
+
+	Nơi lưu trữ: 
+		Win: C:\Users\<your_username>\AppData\Local\Google\Chrome\User Data\Default\
+		Ubuntu: home/<your_username>//.config/google-chrome/Default/Cookies
+
+
+5. Session: dùng để lưu trữ thông tin của người dùng hoặc là lưu trữ tùy chọn cấu hình hệ thống cho người dùng. Đặc biệt mỗi client sẽ có một ID session khác nhau nên việc thông tin Session ở Client A bị ảnh hưởng qua Client B là điều không thể. Thông thường chúng ta sử dụng Session để lưu thông tin đăng nhập, giỏ hàng hoặc những dữ liệu mang tính chất tạm thời và mỗi client sẽ có dư liệu khác nhau
+	Nơi lưu trữ:
+ 		/var/lib/php/sessions
+
+
+
+

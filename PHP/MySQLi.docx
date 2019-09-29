@@ -1,0 +1,24 @@
+MySQLi là bản nâng cấp của MySQL;
+	$conn = mysqli_connect('host', 'user_host', 'pwd_host', 'db_name');	// Connect
+	$query = mysqli_query($conn, 'SQL');	// Query
+	mysqli_num_rows($query); 		
+	mysqli_fetch_array($query);
+	mysqli_fetch_assoc($query);
+	mysqli_close();
+
+class MySQLi;
+	$conn = new MySqli('host', 'user_host', 'pwd_host', 'db_name');
+	$result = $conn->query('SQL');
+	$result->num_rows;
+	$result->fetch_array();
+	$result->fetch_assoc();
+
+	$conn->escape_string('Du lieu can kiem soat')	// Sang loc, kiem soat du lieu
+
+	$statment = $conn->prepare('insert into users(username, password, level) values(?,?,?)');
+	$statment->bind_param('ssi', $u, $p, $l); 	/ i: integer; s: string; d: float;
+	$statment->execute();	// Thực thi
+
+	$result = $statment->get_result(); 	// Lấy kết quả đối với câu truy vấn SELECT
+	$data =	$result->fetch_assoc();  	// 
+	$statment->close();

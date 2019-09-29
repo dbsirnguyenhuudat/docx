@@ -1,0 +1,36 @@
+Regular Expression:  Biểu thức chính quy 
+
+"" : Đặt trong cặp dấu nháy
+"//" : Tập lệnh nằm trong 2 dấu //
+"/^REGULAR$/": Bắt đầu bằng dấu ^, kết thúc bằng $
+|: A hoặc B
+\Ky_tu: Xác định ký tự ở sau là ký tự đặc biệt
+
+A*: phần tử A xuất hiện hoặc không xuất hiện, hoặc xuất hiện nhiều lần
+A+: phần tử A xuất hiện hoặc xuất hiện nhiều lần
+A?: Phần tử A xuất hiện 1 lần hoặc không xuất hiện
+A{x}: phần tử A xuất hiện chính xác x lần
+A{x,y}: phần tử A xuất hiện từ x cho tới y lần
+A{x,}: phần tử A xuất hiện tối thiểu x lần
+
+[]: dữ liệu xuất hiện trong phận đoạn thế nào
+	[a-z]: dữ liệu xuất hiện trong khoảng a-z
+ 	[A-Z]: dữ liệu xuất hiện trong khoảng A-Z
+	[0-9]: dữ liệu xuất hiện trong khoảng 0-9
+	[a-zA-Z0-9]: dữ liệu xuất hiện trong khoảng a-9
+(): dữ liệu xuất hiện chính xác như yêu cầu
+	(AB|CD): dữ liệụ phải xuất hiện là AB hoặc CD
+
+	[a-z]: dữ liệu có thể xuất hiện, không xuất hiện hoặc xuất hiện nhiều lần
+	[a-z]: aa, az -> hợp lệ ; 		aZ-> không hợp lệ
+	[a-z]{3}: aaa,bcd, acd -> hợp lệ; 	CDE-> không hợp lệ
+	(.*): Hợp lệ bất kể ký tự nào
+
+PHP:
+	preg_match("REGULAR", "gia_tri", "ket_qua"): quét 1 cái 1
+	preg_match("REGULAR", "gia_tri"): true or false
+
+	file_get_contents("URL"): Lấy toàn bộ dữ liệu của trang Web khác
+	"/(?<=TAG)/": lấy dữ liệu bắt đầu từ sau thẻ TAG
+	"/(?=TAG)/": lấy dữ liệu ở trước thẻ TAG
+	"msv": bỏ khoảng trắng
